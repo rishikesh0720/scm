@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+  <html lang="en" xmlns:th="http://www.thymeleaf.org" 
+  th:replace="normal/base::layout(~{::section})">
+  
+    <head>
+	     <meta charset="utf-8"/>
+	     
+	     <title>  </title>
+     
+    </head>
+    
+     <body>
+            <section>
+              
+              
+             
+              
+                 <div class="card mr-2 ml-2">
+                   
+                <div class="card-body">
+                         
+                  <h1 class="text-center "> Update Your Contact </h1>
+                    
+                     <div class = "container text-center">
+	                 <img style="height:100px ; width:100px"class ="my_profile_pic" src="" th:src="@{'/img/'+${contact.image}}" 
+	                 alt="">
+	                        
+	                 </div>
+                         
+                    <div class="container-fluid mt-1">
+                           
+                      <div class="row">
+                             
+                        <div class="col-md-8 offset-md-2">
+                             
+                         <form action="#"
+                           th:object="${contact}"
+                           enctype="multipart/form-data"
+                           method="POST"
+                           th:action="@{/user/process-update}"
+                           class="mt-2"
+                          >
+                                 
+                                  <!-- id manage ke liye  -->
+                                  <input type="hidden" th:value="${contact.cId}" name="cId"/>
+                                 
+                              <!-- ab fileds dalenge form ki -->
+                               
+                              
+                               <!-- first name -->
+                               
+                                
+	                               <div class="input-group ">
+	                                  
+	                                   <div class="input-group-prepend">
+	                                   
+	                                        <div class="input-group-text ">
+	                                           
+	                                         <i class="fa fa-plus " style="color: rgb(148, 17, 0);"></i >
+	                                        
+	                                 
+	                                        </div >
+	                                  
+	                                     
+	                                 
+	                                   </div >
+	                                   
+	                                   <input th:value="${contact.name}" type="text" id="firstName" name="name" placeholder="Enter First Name here"
+	                                   class="form-control" />
+	                                   
+	                                  <!-- th:value="${contact.name} isse previous name dekhega --> 
+	                                  
+	                                 
+	                             </div >
+	                               
+	                               
+                               <!-- Second name -->
+                               
+                               
+                               <div class="input-group mt-3">
+	                                  
+	                                  <div class="input-group-prepend">
+	                                   
+	                                     <div class="input-group-text ">
+	                                           
+	                                        <i class="fab fa-discord " style="color: #20c997;"></i>
+	                                        
+	                                 
+	                                     </div >
+	                                  
+	                                     
+	                                 
+	                                   </div >
+	                                   
+	                                   <input th:value="${contact.secondName}" type="text" id="secondName" name="secondName" placeholder="Enter Nick Name here"
+	                                   class="form-control"  />
+	                                  
+	                                   
+	                                  
+	                                 
+	                               </div >
+	                               
+	                               
+                               <!-- phone  field -->
+                               
+                               <div class="input-group mt-3">
+	                                  
+	                                  <div class="input-group-prepend ">
+	                                   
+	                                   <div class="input-group-text ">
+	                                           
+	                                      
+	                                   <i class="fas fa-microphone fa-lg fa-spin" 
+	                                   style="color: rgb(210, 68, 123);"></i>
+	                                 
+	                                    </div >
+	                                  
+	                                     
+	                                 
+	                                   </div >
+	                                   
+	                                   <input th:value="${contact.phone}" type="number" id="phone" name="phone" placeholder="Enter contact number here"
+	                                   class="form-control"  />
+	                                  
+	                                   
+	                                  
+	                                 
+	                               </div >
+                               
+                               
+                               <!--   email field -->
+                                    
+                                    <div class="input-group mt-3">
+	                                  
+	                                  <div class="input-group-prepend ">
+	                                   
+	                                     <div class="input-group-text ">
+	                                           
+	                                      
+	                                      <i class="fas fa-at" style="color: rgb(104, 124, 220);"></i>
+	                                 
+	                                     </div >
+	                                  
+	                                     
+	                                 
+	                                   </div >
+	                                   
+	                                   <input th:value="${contact.email}" type="email" id="email" name="email" placeholder="Enter email here"
+	                                   class="form-control"  />
+	                                  
+	                                   
+	                                  
+	                                 
+	                               </div >
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+           
+                               <!--  work field -->
+                               
+                                 <div class="input-group mt-3">
+	                                  
+	                                <div class="input-group-prepend ">
+	                                   
+	                                   <div class="input-group-text ">
+	                                           
+	                                      
+	                                     <i class="fas fa-briefcase" style="color: rgb(148, 32, 146);" ></i>
+	                                 
+	                                     </div >
+	                                  
+	                                     
+	                                 
+	                                   </div >
+	                                   
+	                                   <input th:value="${contact.work}" type="text" id="work" name="work" placeholder="Enter work here"
+	                                   class="form-control"  />
+	                                  
+	                                   
+	                                  
+	                                 
+	                               </div >
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               
+                               <!--  Contact despcription field -->
+                               
+                               <div class="form-group mt-3" >
+                               
+                               <textarea th:text="${contact.description}" placeholder="Enter contact description" name="description" id="mytextarea" rows="10" class="form-control" style="background-color: rgb(250, 245, 250);"></textarea > 
+                                 
+                               
+	                                  
+	                                <!-- 
+		                              Agar textarea ke tags ko multiple lines me likhoge to place holder
+		                              shown nhi karta 
+		                              Html glitch
+		
+	                                 -->
+	                                   
+	                                  
+	                                 
+	                            </div >
+	                            
+	                             <!-- Image  field -->
+	                            
+                               
+                                  <div class="custom-file">
+                                   
+                                   <input type="file" name="profileImage" />
+                                   
+                                  </div >
+                                
+                                <!-- Button bana rahe hain  -->
+                                
+                                 <div class="container text-center">
+                                   
+                                   <button class="btn btn-outline-danger ">Save Contact</button >
+                                   
+                                   
+                                 </div >
+                                
+                              
+                              
+                           </form>
+                             
+                          </div>
+                             
+                             
+                                
+                        </div>
+                           
+                      </div>
+                         
+                       
+                    </div>
+                       
+                     
+               
+               </div >
+                <script src="https://cdn.tiny.cloud/1/yg4fl0ucbt1suuzv3cdybpt7qu0543okn5ybjzvhxn7yl31w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                <script>
+                   tinymce.init({
+                      selector: '#mytextarea'
+                      });
+               </script>
+                
+              
+             
+            </section>
+    </body>
+    
+  </html>

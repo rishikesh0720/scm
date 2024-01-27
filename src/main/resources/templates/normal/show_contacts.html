@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+  <html lang="en" xmlns:th="http://www.thymeleaf.org" 
+  th:replace="normal/base::layout(~{::section})">
+  
+    <head>
+    
+	     <meta charset="UTF-8"/>
+	     
+	     <title>  </title>
+	     
+     
+    </head>
+    
+    <body>
+     
+      <section>
+        <div class="card mr-3 ml-3">
+          <div class="card-body">
+            <h1 class="text-center"> Your Contacts </h1 >
+                
+                 <table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#ID</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Phone</th>
+					      <th scope="col">Action</th> <!-- update view delete  ke liye!-->
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <!--contacts come from model attribute me pass kiye hai iske controller me-->
+					    <tr  th:each="c : ${contacts}">
+					      <th  scope="row"  th:text="${'C'+c.cId}" >1</th>
+					      <td >
+					      
+					      <img  class="my_profile_pic"  src="" th:src="@{'/img/'+${c.image}}"  alt="profile pic"/>
+					      
+					      <span th:text="${c.name}" ></span >
+					      
+					      </td >
+					      
+					      <td>
+					      <a href="#" th:href="@{'/user/'+${c.cId}+'/contact'}">
+					      <span th:text="${c.email}"> </span >
+					      </a >
+					      
+					      </td >
+					      
+					      <td  th:text="${c.phone}" >@mdo</td >
+					      <td>
+					      
+					       <a href="#" th:onclick="|deleteContact(${c.cId})|" class="btn btn-danger btn-sm"> Delete</a>		       
+					      <!-- here not pass url from controller as it come from function deleteContact(${c.cId} made in base.html and in function we pass controller url -->
+					      <!--  c comes from above we used in each loop fetcg contach details with c so used c.cid to get contact id -->
+					       <form th:action="@{'/user/update-contact/'+${c.cId}}" method="POST">
+					       <!-- here change method to put and in usercontroller we use putmapping  -->
+					       <!--here intial original value we get due to update handler after click update upadteform.html open hoga  -->
+					             <button type="submit" class="btn btn-success btn-sm mt-1"> Update</button >
+					             
+					       </form >
+					       
+					      </td >
+					      
+					      
+					    </tr >
+					    
+					  </tbody>
+                 </table>
+                     
+                 <!-- pagenation ke liye !-->
+                      
+              <nav aria-label="Page navigation example">
+              
+               <ul class="pagination ">
+               
+			    <li th:if="${currentPage != 0}"   class="page-item "><a  th:href="@{'/user/show-contacts/'+${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+			    <!--uper wal cond for previous icon it goes to '/user/show-contacts/'+${currentPage-1}-->
+			    <!-- currentpage 0 indexed hai means 0 current page matlb 1st page !-->
+			    <!-- crrrent apge i-1=0 means 1st page i-1=1 means secong page and son on -->
+			   
+			    <li th:classappend="${currentPage == i-1?'active':''}" th:each="i :${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link" href="#"  ><span th:text="${i}"></span ></a></li >
+			  <!--numbers.sequence(1,totalPages) isme totalpage ye direct de dega -->
+			   <!-- crrentpage i-1 active means jis currentpage pr honge wo blue color dikhega i.e active -->
+			    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/user/show-contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a ></ li>
+			    <!--th:if="${currentPage+1 != totalPages}" means next icon tb dikhaye jb ye condition shi ho
+			    <!-- @{'/user/show-contacts/'+${currentPage+1} this makes goes to next page after click on next icon -->
+			   <!--  here  currentPage+1 kyu ki currentpage 0 se start kie hhai--> -->
+               </ul>
+               
+             </nav>
+                 
+                </div>   
+              </div>  
+            </section> 
+      
+    </body>
+    
+  </html>
